@@ -8,7 +8,7 @@ export const loadCanvasKit = async (): Promise<CanvasKit> => {
     if (CK !== null) return CK;
 
 
-    const CanvasKitInit = window.CanvasKitInit ;
+    const CanvasKitInit  = window.CanvasKitInit;
     if (!CanvasKitInit) {
         throw new Error("CanvasKit не загрузился");
     }

@@ -17,3 +17,25 @@ declare module "canvaskit-wasm" {
         delete: () => void;
     }
 }
+
+import type { CanvasKit, SkCanvas } from "canvaskit-wasm";
+
+// 1. Обучаем TS работе с window.CanvasKitInit
+declare global {
+    interface Window {
+        CanvasKitInit?: (options: { locateFile: (file: string) => string }) => Promise<CanvasKit>;
+    }
+}
+
+// 2. Расширяем интерфейс CanvasKit твоими кастомными C++ методами из WASM
+declare module "canvaskit-wasm" {
+    interface CanvasKit {
+        // any используется для кастомного указателя на документ, так как в стандартных типах его нет
+        PDFDocumentBeginPage(document: any, width: number, height: number): SkCanvas;
+        PDFDocumentEndPage(document: any): void;
+        PDFDocumentCloseAndRelease(document: any): void;
+    }
+}
+
+// Экспортируем пустой объект, чтобы файл считался внешним модулем
+export {};

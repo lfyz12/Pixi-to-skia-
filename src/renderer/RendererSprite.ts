@@ -1,27 +1,28 @@
-import type {BaseTexture, Container, Texture} from "pixi.js-legacy";
+import type {BaseTexture, Container, Sprite, Texture} from "pixi.js-legacy";
 import type {Canvas, CanvasKit, Image} from "canvaskit-wasm";
 
 
 export const rendererSprite = (element: Container, CK: CanvasKit, canvas: Canvas): void => {
-    const texture: Texture = element.texture
+    const sprite = element as Sprite;
+    const texture: Texture = sprite.texture
 
     if (texture && texture.valid) {
-        const baseTexture: BaseTexture = element.texture.baseTexture
+        const baseTexture: BaseTexture = sprite.texture.baseTexture
 
-        const imageSource = baseTexture.resource.source
+        const imageSource = (baseTexture.resource as any).source
 
         if (imageSource) {
             //Конвертируем изображение из html источника в нужный формат для skia
             const ckImage: Image = CK.MakeImageFromCanvasImageSource(imageSource)
 
             if (ckImage) {
-                const frame = element.texture.frame
+                const frame = sprite.texture.frame
                 //Вырезаем нужный кадр по известным данным
                 const srcRect = [frame.x, frame.y, frame.x + frame.width, frame.y + frame.height]
 
 
-                const anchorX = element.anchor ? element.anchor.x : 0
-                const anchorY = element.anchor ? element.anchor.y : 0
+                const anchorX = sprite.anchor ? sprite.anchor.x : 0
+                const anchorY = sprite.anchor ? sprite.anchor.y : 0
 
                 const w = frame.width
                 const h = frame.height

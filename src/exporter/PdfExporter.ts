@@ -49,13 +49,14 @@ export async function exportToPdf (container: Container){
 }
 
 function downloadPdf(data: Uint8Array, fileName: string): void {
-    const blob = new Blob([data], { type: "application/pdf" });
-    const url = URL.createObjectURL(blob);
+    //Копируем данные из WASM-памяти в обычный безопасный ArrayBuffer
+    const safeData = data.slice();
 
+    const blob = new Blob([safeData], { type: "application/pdf" });
+    const url = URL.createObjectURL(blob);
 
     const rootApp: HTMLElement | null = document.getElementById("app");
     const link = document.createElement("a");
-
 
     link.href = url;
     link.download = fileName;
@@ -65,7 +66,5 @@ function downloadPdf(data: Uint8Array, fileName: string): void {
     }
 
     link.click();
-
-
     URL.revokeObjectURL(url);
 }
