@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Graphics Sync Engine (Pixi / CanvasKit)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="dashboard-layout">
+  <header class="toolbar">
+    <div class="toolbar-title">
+      <h2>Тестовое задание SBoard.online</h2>
+      <span class="status-badge">tg:xxxioan</span>
+    </div>
+
+    <div class="controls-group">
+      <div class="color-picker-section">
+        <span class="color-picker-label">Фон сцены:</span>
+        <div class="color-picker-wrapper">
+          <input type="color" id="color-input" value="#ffffff" title="Изменить цвет фона холстов"/>
+        </div>
+      </div>
+
+      <button id="generate-btn" class="btn btn-primary">Сгенерировать объект</button>
+      <button id="download-pdf-btn" class="btn btn-secondary">Экспорт в PDF</button>
+      <button id="clear-btn" class="btn btn-danger">Очистить</button>
+    </div>
+  </header>
+
+  <main id="app">
+
+    <div class="canvas-card">
+      <div class="canvas-card-header">
+        <span class="engine-badge pixi-badge">PIXI.JS</span>
+      </div>
+      <div id="pixi-container"></div>
+    </div>
+
+    <div class="canvas-card">
+      <div class="canvas-card-header">
+        <span class="engine-badge skia-badge">SKIA</span>
+      </div>
+      <canvas id="foo" width="600" height="600"></canvas>
+    </div>
+
+  </main>
+</div>
+
+<script type="module" src="/src/main.ts"></script>
+<script src="/canvaskit.js"></script>
+</body>
+</html>
