@@ -28,5 +28,4 @@ app.stage.eventMode = 'static';
 app.stage.on('pointerdown', () => convertPixiToSkia(mainContainer));
 app.stage.on('pointerup', () => convertPixiToSkia(mainContainer));
 
-// Первичный холостой рендер, чтобы Skia сразу подтянула белый фон
 convertPixiToSkia(mainContainer);
